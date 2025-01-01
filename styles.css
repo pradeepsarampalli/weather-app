@@ -263,3 +263,24 @@ h1{
 .errorInfo img{
     width: 25%;
 }
+
+.apicall{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.497);
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.apicall p{
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.apicall img{
+    width: 25%;
+}

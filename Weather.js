@@ -21,8 +21,10 @@ const ui = document.getElementsByClassName("ui");
 const initialContentinfo = document.getElementsByClassName("initialContentinfo");
 const errorInfo = document.getElementsByClassName("errorInfo");
 const searchButton = document.getElementById("searchButton");
+const apicall = document.getElementsByClassName("apicall");
 
-let apiGeocode= "6773498ca5672067184209lxb52bcf7"; 
+let apiGeocode= "your api here"; 
+let apiOpenWeather = "your api here";
 
 async function fetchapi(city,api) {
     try{
@@ -32,21 +34,35 @@ async function fetchapi(city,api) {
         errorInfo[0].style.display="flex";
         throw new Error("Please enter a valid city Name!");
     }
+}
+    catch(error){
+        initialContentinfo[0].style.display="none";
+        ui[0].style.display="none";
+        apicall[0].style.display="none";
+        errorInfo[0].style.display="flex";
+    }
     const response = await fetch(`https://geocode.maps.co/search?q=${city}&api_key=${api}`);
-    if(ERR_INTERNET_DISCONNECTED){
-
+    try{
+        if (!response.ok) {
+            if (response.status === 429 || response.status===401) {
+                throw new Error("API call limit exceeded. Please try again later.");
+            } else {
+                throw new Error("Error fetching data from the weather API.");
+            }
+        }
+    }
+    catch(error){
+        initialContentinfo[0].style.display="none";
+            ui[0].style.display="none";
+            errorInfo[0].style.display="none";
+            apicall[0].style.display="flex";
     }
     const data = await response.json();
     fetchapiW(data[0].lat,data[0].lon);
-}
-catch(error){
-    initialContentinfo[0].style.display="none";
-    ui[0].style.display="none";
-    errorInfo[0].style.display="flex";
-}
+
 }
 async function fetchapiW(lat,lon) {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=73c92e8174d4185d23404dbaba8c2d66`);
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiOpenWeather}`);
     const data = await response.json();
     let temp=(data.main.temp-273).toFixed(2);
     tempurature.textContent=temp+"°";
@@ -75,6 +91,7 @@ async function fetchapiW(lat,lon) {
     sunset.textContent="Sunset "+sunsetTime;
     initialContentinfo[0].style.display="none";
     errorInfo[0].style.display="none";
+    apicall[0].style.display="none";
     ui[0].style.display="grid";
 }
 
