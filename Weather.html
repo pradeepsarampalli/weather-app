@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: url("background-img/body.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size:cover;
+            margin-top: 0px;
+            height: 100vh;
+            margin: 10px;
+            overflow:hidden;
+           
+        }
+        h1{
+            padding: 0px;
+            padding-right: 30px;
+        }
+        .header{
+            display: flex;
+            flex-direction:initial;
+            align-items: center;
+            padding: 0px;
+            margin: 10px;
+            background-color: rgba(128, 128, 128, 0.473);
+            color: rgba(255, 255, 255, 0.908);
+            margin-top: 20px;
+            border-radius: 20px;
+        }
+        .header img{
+            width: 37px;
+            height: 37px;
+            padding: 10px;
+            border-radius: 20px;
+            
+            
+        }
+        .search{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+        .search input{
+            padding-left: 20px;
+            flex: 1;
+            margin: 25px;
+            margin-top: 0px;
+            height: 40px;
+            border-radius: 10px;
+            border: 0.15px solid gray;
+            opacity: 0.9;
+        }
+        .search button{
+            width: 100px;
+            height: 42px;
+            margin-right: 25px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 0.15px solid green;
+            background-color:rgba(255, 255, 0, 0.905);
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .search button:hover{
+            opacity: .8;
+        }
+        .search button:active{
+            padding: 8px;
+            box-shadow: 1.5px 1.5px 1.5px;
+        }
+        .content{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 600px;
+            margin: 25px;
+            margin-top: 0PX;
+            text-align: center;
+            border: 1px solid rgb(128, 128, 128);
+            border-radius: 15px;
+            background-color: rgba(128, 128, 128, 0.5);
+            padding: 10px;
+        }
+        #cityname{
+            font-size: 30px;
+        }
+        #tempurature{
+            font-size: 50px;
+        }
+        #weathertype{
+            width: 200px;
+            height: 200px;
+            margin-bottom: 0px;
+            padding: 0px;
+            object-position: top;
+            object-fit: cover;
+            
+        }
+        .weathericon{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            position: relative;
+        }
+        .weathericon p{
+            margin-top: 0px;
+            vertical-align: top;
+            position: absolute;
+            bottom: 180px;
+        }
+        .additionalinfo{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-left: 10px;
+            border: 1px solid gray;
+            column-gap: 10px;
+            border-radius: 10px;
+            padding-top: 10px;
+            background-color: rgba(128, 128, 128, 0.4);
+        }
+        .additionalinfo p{
+            margin-left: 25px;
+            margin-right: 25px;
+
+        }
+        .ui{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 15px;
+            display: none;
+        }
+        .timings{
+            display: flex;
+            flex-direction: column;
+            border: 1px solid gray;
+            background-color: rgba(128, 128, 128, 0.5);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .highlights{
+            border-radius: 10px;
+            background-color: rgba(128, 128, 128, 0.5);
+            text-align: center;
+        }
+        #tempimg{
+            width: 50px;
+            height: 50px;
+        }
+        #locationimg{
+            width: 25px;
+            height: 25px;
+        }
+        .tempuraturedetails{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .contentui{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .highlights{
+            display: flex;
+            flex-direction: column;
+        }
+        .highlights p{
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .highlightsui{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding-left: 20%;
+            padding-top: 2%;
+            
+        }
+        .highlightsui img{
+            width: 30px;
+            height: 30px;
+            padding-right: 2%;
+        }
+        .timingsui{
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            padding-left: 20%;
+            padding-top: 10%;
+        }
+        .timingsui img{
+            width: 30px;
+            height: 30px;
+            padding-right: 2%;
+        }
+        .info{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 20px;
+        }
+        .info img{
+            width: 30px;
+            height: 30px;
+            padding-right: 5px;
+        }
+        .info p{
+            margin: 0px;
+
+        }
+        .initialContent{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+        .initialContent img{
+            width: 100%;
+        }
+        .initialContentinfo{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(128, 128, 128, 0.497);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            margin-right: 40px;
+        }
+        .initialContentinfo p{
+            font-size: 30px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .initialContentinfo img{
+            width: 25%;
+        }
+        .errorInfo{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(128, 128, 128, 0.497);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .errorInfo p{
+            font-size: 30px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .errorInfo img{
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <img src="background-img/applogo.avif">
+        <h1>Weather Web</h1>
+    </header>
+    <div class="search">
+    <input id="inputValue" type="text" placeholder="Search a city">
+    <button id="searchButton" onclick="searchCity()">Search</button>
+    </div>
+    <div class="initialContentinfo">
+        <img src="search/searchIcon.png">
+        <p>🔎Search a City</p>
+        <p>Find Out Weather in your Area!</p>
+    </div>
+    <div class="errorInfo">
+        <img src="search/not-found.png">
+        <p>City Not Found</p>
+        <p>Please check cityname you typed!</p>
+    </div>
+    <div class="ui">
+        <div class="timings">
+            <div class="timingsui">
+                <img src="left_section/sunrise.png">
+                <p id="sunrise"> </p>
+            </div> 
+            <div class="timingsui">
+                <img src="left_section/sunset.png">
+                <p id="sunset"> </p>
+            </div>
+            <div class="timingsui">
+                <img src="left_section/lat.png">
+                <p id="longitude">  </p>
+            </div>
+            <div class="timingsui">
+                <img src="left_section/lon.png">
+                <p id="latitude"> </p>
+            </div>
+            <div class="timingsui">
+                <img src="left_section/rain.png">
+                <p id="cor"></p>
+            </div>
+        </div>
+    <div>
+    <div class="content">
+        <div>
+            <div class="contentui">
+                <img  id="locationimg" src="middle-upper-section/location.png">
+            <p id="cityname"></p>
+        </div>
+            <div class="tempuraturedetails">
+            <p id="tempurature"></p>
+            <img id="tempimg" src="middle-upper-section/celsius.png">
+        </div>
+        </div>
+        <div class="weathericon">
+            <img id="weathertype" src="">
+            <p id="weathertext"></p>
+        </div>
+    </div>
+    <div class="additionalinfo">
+        <div class="info">
+            <img src="middle-lower-section/humidity.png">
+            <p id="humidity"> </p>
+        </div>
+        <div class="info">
+            <img src="middle-lower-section/wind.png">
+            <p id="wind"></p>
+        </div>
+        <div class="info">
+            <img src="middle-lower-section/pressure.png">
+            <p id="pressure"></p>
+        </div>
+    </div>
+</div>
+<div class="highlights">
+    <div class="highlightsui">
+        <img src="right-section/favorite.png">
+    <h3>Highlights</h3>   
+</div>
+<div class="highlightsui">
+    <img src="right-section/feelslike.png">
+    <p id="feelslike"></p>
+</div>
+<div class="highlightsui">
+    <img src="right-section/mintemp.png">
+    <p id="mintemp"></p>
+</div>
+<div class="highlightsui">
+    <img src="right-section/maxtemp.png">
+    <p id="maxtemp"></p>
+</div>
+<div class="highlightsui">
+    <img src="right-section/visibility.png">
+    <p id="visibility"></p>
+</div> 
+<div class="highlightsui">
+    <img src="right-section/clouds.png">
+    <p id="clouds"></p>
+</div> 
+    
+    
+</div>
+    </div>
+    <script src="Weather.js"></script>
+</body>
+</html>
